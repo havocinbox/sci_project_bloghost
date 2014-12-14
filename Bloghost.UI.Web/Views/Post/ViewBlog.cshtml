@@ -1,0 +1,141 @@
+﻿@using Bloghost.Model
+@using Bloghost.UI.Web.Authentication
+@model Bloghost.UI.Web.Models.ViewBlogModel
+
+@{
+    ViewBag.Title = Model.Title + " | Description";
+    ViewBag.BlogsClass = "class=action parent";
+}
+
+<div class="hero-unit">
+    <div class="container">
+        <h2>Blog</h2>
+        <h3 id="currentTitle">@Model.Title</h3>
+    </div>
+</div>
+
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid portfolio-detail">
+
+        <div class="alert alert-error" id="Error" style="display: none;">
+            <button data-dismiss="alert" class="close" type="button">×</button>
+            <strong>Error!</strong> <span id="ErrorMessage"></span>
+        </div>
+
+        <div class="alert alert-success" id="Success" style="display: none;">
+            <button data-dismiss="alert" class="close" type="button">×</button>
+            <strong>Success!</strong> <span id="SuccessMessage"></span>
+        </div>
+
+        <div class="span7 offset1 image-slider" role="image-slider">
+            <div id="slider" class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <a class="zoom-image fancysingle" href="@Url.Content("~/Images/" + Model.PathToAvatar)">View Larger Image</a>
+                        <img src="@Url.Content("~/Images/" + Model.PathToAvatar)" alt=""></li>
+                </ul>
+            </div>
+        </div>
+
+        <section class="span4 project-description" role="project-description">
+            <p id="currentDescription">@Model.Description</p>
+            <h6><i class="icon-pencil"></i>Author:</h6>
+            <p><a href="/users/@Model.User.AccessName" target="_blank" title="CC BY 2.0  Jeremy Keith">@Model.User.Name</a></p>
+            <h6><i class="icon-tags"></i>Tags:</h6>
+            <div class="tag-wrapper" style="margin-top: 2%;">
+                @for (var i = 0; i < 30 && Model.Tags.Count() > i; i++)
+                {
+                    <a class="tag" href="#">@Model.Tags.ToArray()[i]</a>
+                }
+            </div>
+            <h6><a href="@Url.Action("ShowListPosts", "Post")" class="btn btn-very-subtle" style="margin-top: 7%;width: 100%;">View list posts &rarr;</a> </h6>
+            @if ((Authentication.IsAuthentication && Authentication.CurrentUser.Id.Equals(Guid.Parse(Model.User.Id))) ||
+        Authentication.IsAuthentication && (Authentication.CurrentUser.Role.Name == Role.Names.MODERATOR || Authentication.CurrentUser.Role.Name == Role.Names.ADMINISTRATOR))
+            {
+                <h6>
+                    <a href="/blogs/@Model.Title.Replace(' ', '_')?action=create" class="btn btn-very-subtle" style="margin-top: 0%; width: 100%;"><i class="icon-edit"></i>Create new post</a>
+                </h6>
+                <h6>
+                    <a href="#updateBlogModel" data-toggle="modal" class="btn btn-very-subtle" style="margin-top: 5%; width: 100%;"><i class="icon-cogs"></i>Edit blog</a>
+                </h6>
+                <h6 class="btn-delete">
+                    <a href="#deleteBlogModel" data-toggle="modal" class="btn btn-very-subtle" style="margin-top: 0%; width: 100%;"><i class="icon-remove"></i>Delete blog</a>
+                </h6>
+            }
+        </section>
+
+        <!-- Delete blog modal -->
+        <input type="hidden" value="@Model.Id" id="blogId"/>
+        <div class="modal fade" style="display: none;" id="deleteBlogModel" tabindex="-1" role="dialog" aria-labelledby="DeleteProfileModelLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Are you ABSOLUTELY sure?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>This action <b>CANNOT</b> be undone. This will delete <b>your blog</b>, posts, and comments permanently.</p>
+                        <p>Please type in the <b>BLOG LINK</b> to confirm.</p>
+                        <div class="modal-form">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <h6 class="btn-delete">
+                            <button id="deleteBlogButton" type="button" class="btn btn-primary" style="width: 100%;">I understand the consequences, delete my blog</button>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit blog modal -->
+        <div class="modal fade" style="display: none;" id="updateBlogModel" tabindex="-1" role="dialog" aria-labelledby="editProfileModelLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Edit blog</h4>
+                    </div>
+
+                    <div class="modal-open" id="#EditBlogError" style="display: none">
+                        <div class="alert-error">
+                            <div>
+                                <strong>Error!</strong> <span id="EditBlogErrorMessage"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="modal-form">
+                            <div class="control-group">
+                                <input type="hidden" id="action" value="Edit blog" />
+                                <input type="hidden" id="blogLink" value="@Model.AccessName" />
+                                <input type="hidden" id="id" value="@Model.Id" />
+                                <input type="hidden" id="userId" value="@Model.User.Id" />
+                                <label for="Title" class="required control-label">Title </label>
+                                <div class="controls">
+                                    <input type="text" id="Title" class="span12" autocomplete="off" value="@Model.Title" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="Description" class="required control-label">Description </label>
+                                <div class="controls">
+                                    <textarea class="span12" id="Description">@Model.Description</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="editBlogButton" type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

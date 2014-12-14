@@ -1,0 +1,70 @@
+﻿@model Bloghost.UI.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    ViewBag.Login = "class=active";
+}
+
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid">
+        <div class="span12">
+
+            <!--begin hidden by js forgot pw form -->
+            <div class="login-box forgot-password clearfix">
+                <header>
+                    <h2 class="short_headline"><span>Forgot Password?</span></h2>
+                </header>
+                <p class="statement">Please enter your email and we’ll send it you.</p>
+                <form action="http://bombdiggitydesign.com/crisp-2/Crisp-cool/yourscript.php" method="post">
+                    <div class="input-append">
+                        <input type="email" class="span6" placeholder="Email Address" name="email" />
+                        <button class="btn btn-primary">Send Password</button>
+                    </div>
+                    <!--close input-append-->
+                </form>
+            </div>
+            <!--*******end forgot-password********-->
+
+            <div class="login-box clearfix">
+                <header>
+                    <h2 class="short_headline"><span>Login to your account...</span></h2>
+                </header>
+                @if (ViewBag.HasError != null && ViewBag.HasError)
+                {
+                    <div class="alert alert-error">
+					<button data-dismiss="alert" class="close" type="button">×</button>
+					<strong>Error!</strong> @ViewBag.ErrorMessage </div>
+                }
+                <div class="login-wrapper clearfix">
+                    <div class="float-left">
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "login-form" }))
+                        {
+                            <label for="Email" class="required">Email <span class="required">*</span></label>
+                            <div class="input-prepend">
+                                <span class="add-on">@@</span>
+                                @Html.TextBoxFor(m => m.Email)
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+                            
+                            <label for="Password" class="required">Password <span class="required">*</span></label>
+                            <div class="input-prepend">
+                                <span class="add-on">#</span>
+                                @Html.PasswordFor(m => m.Password)
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                            <label class="checkbox inline" for="RememberMe">
+                                @Html.CheckBoxFor(m => m.RememberMe, new { id="RememberMe" })
+                                Remember Me
+                            </label>
+                            <div class="form-controls">
+                                <input class="btn btn-primary btn-large" type="submit" name="login" value="Login" />
+                            </div>
+                        }
+                        <footer class="clearfix"><a href="#" class="forgotpw">Forgot Password?</a> </footer>
+                        <p>@Html.ActionLink("Not a member? Join today!", "CreateProfile", "Profile")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

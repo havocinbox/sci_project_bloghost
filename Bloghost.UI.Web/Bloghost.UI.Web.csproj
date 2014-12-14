@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E4746294-2DAA-46BA-806F-559096E4D79C}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bloghost.UI.Web</RootNamespace>
+    <AssemblyName>Bloghost.UI.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.30506.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BootstrapBundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Authentication\Authentication.cs" />
+    <Compile Include="Authentication\IUserProvider.cs" />
+    <Compile Include="Authentication\UserProvider.cs" />
+    <Compile Include="Authentication\UserIndentity.cs" />
+    <Compile Include="Authentication\IAuthentication.cs" />
+    <Compile Include="Controllers\ApiControllers\AuthController.cs" />
+    <Compile Include="Controllers\ApiControllers\PostsController.cs" />
+    <Compile Include="Controllers\ApiControllers\UsersController.cs" />
+    <Compile Include="Controllers\ApiControllers\BlogsController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\FileLoader.cs" />
+    <Compile Include="Infrastructure\VariablesFactory.cs" />
+    <Compile Include="Infrastructure\Const.cs" />
+    <Compile Include="Mappers\ApiModelMappers\BlogApiModelMapper.cs" />
+    <Compile Include="Mappers\ApiModelMappers\CommentApiModelMapper.cs" />
+    <Compile Include="Mappers\ApiModelMappers\PostApiModelMapper.cs" />
+    <Compile Include="Mappers\ApiModelMappers\RoleApiModelMapper.cs" />
+    <Compile Include="Mappers\ApiModelMappers\ShortUserApiModelMapper.cs" />
+    <Compile Include="Mappers\ApiModelMappers\UserApiModelMapper.cs" />
+    <Compile Include="Mappers\EditCommentMapper.cs" />
+    <Compile Include="Mappers\ViewBlogMapper.cs" />
+    <Compile Include="Mappers\ViewBlogListMapper.cs" />
+    <Compile Include="Mappers\EditPostMapper.cs" />
+    <Compile Include="Mappers\ViewPostListMapper.cs" />
+    <Compile Include="Mappers\ViewCommentMapper.cs" />
+    <Compile Include="Mappers\ViewPostMapper.cs" />
+    <Compile Include="Mappers\EditBlogMapper.cs" />
+    <Compile Include="Mappers\EntityMapperFactory.cs" />
+    <Compile Include="Mappers\RegisterUserMapper.cs" />
+    <Compile Include="Mappers\ViewUserMapper.cs" />
+    <Compile Include="Mappers\EntityMapperBase.cs" />
+    <Compile Include="Mappers\IEntityMapper.cs" />
+    <Compile Include="Models\ApiModels\BlogApiModel.cs" />
+    <Compile Include="Models\ApiModels\CommentApiModel.cs" />
+    <Compile Include="Models\ApiModels\PostApiModel.cs" />
+    <Compile Include="Models\ApiModels\RoleApiModel.cs" />
+    <Compile Include="Models\ApiModels\ShortUserApiModel.cs" />
+    <Compile Include="Models\ApiModels\UserApiModel.cs" />
+    <Compile Include="Models\EditComment.cs" />
+    <Compile Include="Models\ViewBlogModel.cs" />
+    <Compile Include="Models\ViewBlogListModel.cs" />
+    <Compile Include="Models\EditPostModel.cs" />
+    <Compile Include="Models\ViewPostListModel.cs" />
+    <Compile Include="Models\ViewCommentModel.cs" />
+    <Compile Include="Models\ViewPostModel.cs" />
+    <Compile Include="Models\DeleteBlogModel.cs" />
+    <Compile Include="Models\EditBlogModel.cs" />
+    <Compile Include="Models\EditUserModel.cs" />
+    <Compile Include="Models\DeleteUserModel.cs" />
+    <Compile Include="Models\RegisterUserModel.cs" />
+    <Compile Include="Models\ViewUserModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\themes\base\css\blog.css" />
+    <Content Include="Content\themes\base\css\boxed-slider-flexslider.css" />
+    <Content Include="Content\themes\base\css\font-awesome.css" />
+    <Content Include="Content\themes\base\css\gallery-folio-masonry.css" />
+    <Content Include="Content\themes\base\css\header-1.css" />
+    <Content Include="Content\themes\base\css\header-2.css" />
+    <Content Include="Content\themes\base\css\hero-equal-thumb-gallery.css" />
+    <Content Include="Content\themes\base\css\html-content-slider-flexslider.css" />
+    <Content Include="Content\themes\base\css\lemmon-slider.css" />
+    <Content Include="Content\themes\base\css\portfolio.css" />
+    <Content Include="Content\themes\base\css\pricingcolumns.css" />
+    <Content Include="Content\themes\base\css\socialicoregular.css" />
+    <Content Include="Content\themes\base\css\tabs-toggle.css" />
+    <Content Include="Content\header-1.css" />
+    <Content Include="Content\themes\base\images\50p.png" />
+    <Content Include="Content\themes\base\images\5p.png" />
+    <Content Include="Content\themes\base\images\70p.png" />
+    <Content Include="Content\themes\base\images\7p.png" />
+    <Content Include="Content\themes\base\images\80pwhite.png" />
+    <Content Include="Content\themes\base\images\blogicons\fakelogo-1.png" />
+    <Content Include="Content\themes\base\images\blogicons\fakelogo-2.png" />
+    <Content Include="Content\themes\base\images\blogicons\fakelogo-3.png" />
+    <Content Include="Content\themes\base\images\blogicons\fakelogo-4.png" />
+    <Content Include="Content\themes\base\images\blogicons\fakelogo-5.png" />
+    <Content Include="Content\themes\base\images\blogicons\fakelogo-6.png" />
+    <Content Include="Content\themes\base\images\demo\1-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\1-sm.jpg" />
+    <Content Include="Content\themes\base\images\demo\125banner-fpo.png" />
+    <Content Include="Content\themes\base\images\demo\2-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\2-sm.jpg" />
+    <Content Include="Content\themes\base\images\demo\2col-sbl-ss.png" />
+    <Content Include="Content\themes\base\images\demo\2col-sbr-ss.png" />
+    <Content Include="Content\themes\base\images\demo\3-col-contemp-ss.png" />
+    <Content Include="Content\themes\base\images\demo\3-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\3-sm.jpg" />
+    <Content Include="Content\themes\base\images\demo\4830134044.jpg" />
+    <Content Include="Content\themes\base\images\demo\4839972619.jpg" />
+    <Content Include="Content\themes\base\images\demo\5817823805.jpg" />
+    <Content Include="Content\themes\base\images\demo\80x80-Diego_Velazquez_028.png" />
+    <Content Include="Content\themes\base\images\demo\about-2.png" />
+    <Content Include="Content\themes\base\images\demo\about-3.png" />
+    <Content Include="Content\themes\base\images\demo\about-me.png" />
+    <Content Include="Content\themes\base\images\demo\boxed-slider\Camille_Pissarro_019.png" />
+    <Content Include="Content\themes\base\images\demo\boxed-slider\Canaletto_%28I%29_021.png" />
+    <Content Include="Content\themes\base\images\demo\boxed-slider\Maler_der_Geschichte_von_Bayad_und_Riyad_003.png" />
+    <Content Include="Content\themes\base\images\demo\centered-cta.jpg" />
+    <Content Include="Content\themes\base\images\demo\centered-hero-unit-no-border.jpg" />
+    <Content Include="Content\themes\base\images\demo\dave.jpg" />
+    <Content Include="Content\themes\base\images\demo\demo.css" />
+    <Content Include="Content\themes\base\images\demo\desktopmenu-ss.png" />
+    <Content Include="Content\themes\base\images\demo\fakelogo-1.png" />
+    <Content Include="Content\themes\base\images\demo\fakelogo-2.png" />
+    <Content Include="Content\themes\base\images\demo\fakelogo-3.png" />
+    <Content Include="Content\themes\base\images\demo\fakelogo-4.png" />
+    <Content Include="Content\themes\base\images\demo\fakelogo-5.png" />
+    <Content Include="Content\themes\base\images\demo\fakelogo-6.png" />
+    <Content Include="Content\themes\base\images\demo\fancybox-ss.png" />
+    <Content Include="Content\themes\base\images\demo\fc-mucha-sm-1.png" />
+    <Content Include="Content\themes\base\images\demo\fc-mucha-sm-2.png" />
+    <Content Include="Content\themes\base\images\demo\fc-mucha-sm-3.png" />
+    <Content Include="Content\themes\base\images\demo\fc-mucha-sm-4.png" />
+    <Content Include="Content\themes\base\images\demo\fc-mucha1.png" />
+    <Content Include="Content\themes\base\images\demo\fc-mucha2.png" />
+    <Content Include="Content\themes\base\images\demo\fc-Sandro_Botticelli_046.png" />
+    <Content Include="Content\themes\base\images\demo\fc-Sandro_Botticelli_058.png" />
+    <Content Include="Content\themes\base\images\demo\fc-Sandro_Botticelli_077.png" />
+    <Content Include="Content\themes\base\images\demo\fotogrph-relaxation-sm.jpg" />
+    <Content Include="Content\themes\base\images\demo\fotogrph-running-water.jpg" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-430px-Vincent_Willem_van_Gogh_014.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-457px-Maler_der_Grabkammer_des_Minnacht_001.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-487px-Vincent_Willem_van_Gogh_101.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-490px-Raffael_013.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-491px-Michelangelo_Caravaggio_046.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-499px-Maler_der_Grabkammer_der_Nefertari_001.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-708px-Vincent_Willem_van_Gogh_012.png" />
+    <Content Include="Content\themes\base\images\demo\fresh-work\fw-744px-Edouard_Manet_010.png" />
+    <Content Include="Content\themes\base\images\demo\holy-grail-ss.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\1.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\10.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\11.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\12.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\2.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\3.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\4.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\5.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\6.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\7.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\8.png" />
+    <Content Include="Content\themes\base\images\demo\image-widget\9.png" />
+    <Content Include="Content\themes\base\images\demo\jackie.jpg" />
+    <Content Include="Content\themes\base\images\demo\jake.jpg" />
+    <Content Include="Content\themes\base\images\demo\jquery.syntaxhighlighter.min.js" />
+    <Content Include="Content\themes\base\images\demo\kathy.jpg" />
+    <Content Include="Content\themes\base\images\demo\left-hero-unit-w-border.jpg" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Byzantinischer_Mosaizist_um_1122_001.png" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Edouard_Manet_010.png" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Maler_der_Grabkammer_der_Nefertari_001.png" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Mona_Lisa_by_Leonardo_da_Vinci_042.png" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Sandro_Botticelli_046.png" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Sandro_Botticelli_077.png" />
+    <Content Include="Content\themes\base\images\demo\lemmon-slider\Vincent_Willem_van_Gogh_101.png" />
+    <Content Include="Content\themes\base\images\demo\mobilemenu-ss.png" />
+    <Content Include="Content\themes\base\images\demo\mobile_crisp.png" />
+    <Content Include="Content\themes\base\images\demo\nickie.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\1-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\1.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\2-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\2.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\3-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\3.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\4-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\4.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\5-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\5.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\6-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\6.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\7-lrg.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\7.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\ff-large.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\fontlove-large.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\larger-image-fpo.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\rain-large.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\related-fpo-1.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\related-fpo-2.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\related-fpo-3.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\related-fpo-4.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\related-fpo-5.html" />
+    <Content Include="Content\themes\base\images\demo\portfolio\related-fpo-6.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-ann-marie-comp.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-bogart-yogurt.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-ffmore.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-fontlove.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-maler.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-mona-lisa.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-mucha.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-responsive-showcase.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-screen-shot.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-smartgirls.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-tgs.png" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-thinkmore.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-typography.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\t-wishrain.jpg" />
+    <Content Include="Content\themes\base\images\demo\portfolio\think-more-large.jpg" />
+    <Content Include="Content\themes\base\images\demo\responsive-showcase.png" />
+    <Content Include="Content\themes\base\images\demo\scott.jpg" />
+    <Content Include="Content\themes\base\images\demo\secondary-nav-btn-ss.png" />
+    <Content Include="Content\themes\base\images\demo\slide-Alfons_Mucha_-_1896_-_Summer.png" />
+    <Content Include="Content\themes\base\images\demo\theme-google.html" />
+    <Content Include="Content\themes\base\images\demo\three-col-nav-btn-ss.png" />
+    <Content Include="Content\themes\base\images\demo\trad-cta.jpg" />
+    <Content Include="Content\themes\base\images\hr.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Byzantinischer_Mosaizist_um_1122_001.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Edouard_Manet_010.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Maler_der_Grabkammer_der_Nefertari_001.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Mona_Lisa_by_Leonardo_da_Vinci_042.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Sandro_Botticelli_046.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Sandro_Botticelli_077.png" />
+    <Content Include="Content\themes\base\images\lemmon-slider\Vincent_Willem_van_Gogh_101.png" />
+    <Content Include="Content\themes\base\images\loader.gif" />
+    <Content Include="Content\themes\base\images\logo.png" />
+    <Content Include="Content\themes\base\images\menu_arrow.png" />
+    <Content Include="Content\themes\base\images\navtriggerbg.png" />
+    <Content Include="Content\themes\base\images\open-quote-white.png" />
+    <Content Include="Content\themes\base\images\open-quote.png" />
+    <Content Include="Content\themes\base\images\print-logo.png" />
+    <Content Include="Content\themes\base\images\profiles\dave.jpg" />
+    <Content Include="Content\themes\base\images\profiles\jackie.jpg" />
+    <Content Include="Content\themes\base\images\profiles\jake.jpg" />
+    <Content Include="Content\themes\base\images\profiles\kathy.jpg" />
+    <Content Include="Content\themes\base\images\profiles\nickie.jpg" />
+    <Content Include="Content\themes\base\images\profiles\scott.jpg" />
+    <Content Include="Content\themes\base\images\retina\hr_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\loader_%402x.gif" />
+    <Content Include="Content\themes\base\images\retina\logo_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\menu_arrow_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\navtriggerbg_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\open-quote-white_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\open-quote_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\plus_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\search_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\sidebar-list-icon_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\sliderarrows_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\tall-logo-mobile_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\top_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\video-icon-small_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\videoicon_%402x.png" />
+    <Content Include="Content\themes\base\images\retina\zoom-corner_%402x.png" />
+    <Content Include="Content\themes\base\images\search.png" />
+    <Content Include="Content\themes\base\images\sign-in-facebook.png" />
+    <Content Include="Content\themes\base\images\sign-in-google.png" />
+    <Content Include="Content\themes\base\images\sign-in-linkedin.png" />
+    <Content Include="Content\themes\base\images\sign-in-openid.png" />
+    <Content Include="Content\themes\base\images\sign-in-twitter.png" />
+    <Content Include="Content\themes\base\images\sign-in-yahoo.png" />
+    <Content Include="Content\themes\base\images\tall-logo-desktop.png" />
+    <Content Include="Content\themes\base\images\tall-logo-mobile.png" />
+    <Content Include="Content\themes\base\images\top.png" />
+    <Content Include="Content\themes\base\images\trans.gif" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\themes\base\images\plus.png" />
+    <Content Include="Content\themes\base\images\rule.png" />
+    <Content Include="Content\themes\base\images\sidebar-list-icon.png" />
+    <Content Include="Content\themes\base\images\sliderarrows.png" />
+    <Content Include="Content\themes\base\images\video-icon-small.png" />
+    <Content Include="Content\themes\base\images\videoicon.png" />
+    <Content Include="Content\themes\base\images\zoom-corner.png" />
+    <Content Include="Content\themes\base\js\fancybox\source\blank.gif" />
+    <Content Include="Content\themes\base\js\fancybox\source\fancy-new-sprite.png" />
+    <Content Include="Content\themes\base\js\fancybox\source\fancy-new-sprite_%402x.png" />
+    <Content Include="Content\themes\base\js\fancybox\source\fancybox_loading.gif" />
+    <Content Include="Content\themes\base\js\fancybox\source\fancybox_overlay.png" />
+    <Content Include="Content\themes\base\js\fancybox\source\fanybox_custom.html" />
+    <Content Include="Content\themes\base\js\fancybox\source\helpers\fancybox_buttons.png" />
+    <Content Include="Content\themes\base\js\fancybox\source\helpers\fancybox_buttons_%402x.png" />
+    <Content Include="Content\themes\base\js\fancybox\source\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Content\themes\base\js\fancybox\source\helpers\jquery.fancybox-media.js" />
+    <Content Include="Content\themes\base\js\fancybox\source\jquery.fancybox.css" />
+    <Content Include="Content\themes\base\js\fancybox\source\jquery.fancybox.pack.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\themes\base\font\fontawesome-webfont.svg" />
+    <Content Include="Content\themes\base\font\fontawesome-webfont1f7d.eot" />
+    <Content Include="Content\themes\base\font\fontawesome-webfont1f7d.ttf" />
+    <Content Include="Content\themes\base\font\fontawesome-webfont1f7d.woff" />
+    <Content Include="Content\themes\base\font\fontawesome-webfontd41d.eot" />
+    <Content Include="Content\themes\base\font\zocial5344.eot" />
+    <Content Include="Content\themes\base\font\zocial5344.svg" />
+    <Content Include="Content\themes\base\font\zocial5344.ttf" />
+    <Content Include="Content\themes\base\font\zocial5344.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\bootstrap-wysiwyg.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\jquery.hotkeys.js" />
+    <Content Include="Scripts\functions.js" />
+    <Content Include="Scripts\isotope_custom.min.js" />
+    <Content Include="Scripts\editor.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\lemmon-slider.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <Content Include="Views\Shared\_Preheader.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Post\ShowListPosts.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_PostSideBar.cshtml" />
+    <Content Include="Views\Shared\_PostListSideBar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Images\BlogAvatars\" />
+    <Folder Include="Images\Others\" />
+    <Folder Include="Images\Temp\" />
+    <Folder Include="Images\UserAvatars\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\ViewBlog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Blog\CreateBlog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\CreatePost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\EditPost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Profile\ShowListProfiles.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\ViewPost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Blog\ShowListBlogs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Profile\CreateProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Profile\ViewProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bloghost.Logic.Components\Bloghost.Logic.Components.csproj">
+      <Project>{91130726-83e4-4180-985d-ace32af9d691}</Project>
+      <Name>Bloghost.Logic.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bloghost.Logic\Bloghost.Logic.csproj">
+      <Project>{b7d42bac-9730-4e40-b24e-127864414044}</Project>
+      <Name>Bloghost.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bloghost.Model\Bloghost.Model.csproj">
+      <Project>{3b93c296-9a8f-4525-bfe6-965c6d26d040}</Project>
+      <Name>Bloghost.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilies\Utilies.csproj">
+      <Project>{9d39da59-d3f9-4e13-a6af-4fb058702f07}</Project>
+      <Name>Utilies</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2317/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,70 @@
+﻿@using Bloghost.Logic.Components
+@model Bloghost.UI.Web.Models.EditBlogModel
+
+@{
+    var user = Bloghost.UI.Web.Authentication.Authentication.CurrentUser;
+    ViewBag.Title = "Create new blog | " + user.Name;
+    ViewBag.CreateBlog = "class=active";
+}
+
+<div class="hero-unit">
+    <div class="container">
+        <h2>Create new blog</h2>
+        <h3></h3>
+    </div>
+</div>
+
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid">
+        @if (ViewBag.HasError != null && ViewBag.HasError)
+        {
+            <div class="alert alert-error">
+                <button data-dismiss="alert" class="close" type="button">×</button>
+                <strong>Error!</strong> @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <div class="register-box clearfix">
+            @Html.ValidationMessage("All")
+
+            @using (Html.BeginForm("CreateBlog", "Blog", FormMethod.Post, new { @class = "form-horizontal", id = "registration-form-extended", @enctype = "multipart/form-data" }))
+            {
+                <fieldset>
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="control-group">
+                        <label class="required control-label">Author </label>
+                        <div class="controls">
+                            <span class="input-xlarge uneditable-input" style="width: 580px">
+                                @user.Name
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="Title" class="control-label required">Title</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Title, new { id = "Title", @class = "span12" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Upload Blog Avatar</label>
+                        <div class="controls">
+                            <span class="btn btn-primary fileinput-button"><span><i class="icon-plus icon-white"></i>Select avatar...</span>
+                                <input type="file" id="File" name="File" />
+                            </span>@*<span class="info">(125 x 125 px 24 bit png)</span>*@
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label required" for="Description">Description </label>
+                        <div class="controls">
+                            @Html.TextAreaFor(m => m.Description, new { @class = "span3 required", style = "width:580px;" })
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input class="btn btn-primary btn-large" type="submit" name="editBlogButton" value="Create" />
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>

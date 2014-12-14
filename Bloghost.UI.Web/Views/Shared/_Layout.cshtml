@@ -1,0 +1,46 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script>window.jQuery || document.write('<script src="~/Scripts/jquery-1.9.1.min.js"><\/script>')</script>
+</head>
+
+<body>
+    <ul class="visuallyhidden" id="top">
+        <li><a href="#nav" title="Skip to navigation" accesskey="n">Skip to navigation</a></li>
+        <li><a href="#page" title="Skip to content" accesskey="c">Skip to content</a></li>
+    </ul>
+
+    <!-- mobile navigation trigger-->
+    <h5 class="mobile_nav"><a href="javascript:void(0)">&nbsp;<span></span></a></h5>
+    <!--end mobile navigation trigger-->
+
+    @Html.Partial("_Preheader")
+
+    <!-- begin .header-->
+    <header class="header  clearfix">
+        <img src="@Url.Content("~/Content/themes/base/images/print-logo.png")" class="print logo" alt="name of company" />
+        @Html.Partial("_Menu")
+    </header>
+
+    <div id="page">
+        @RenderBody()
+
+        @Html.Partial("_Footer")
+
+        <span class="backToTop"><a href="#top">back to top</a></span>
+    </div>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+</body>
+</html>

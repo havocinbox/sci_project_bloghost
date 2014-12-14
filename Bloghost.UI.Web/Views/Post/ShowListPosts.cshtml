@@ -1,0 +1,85 @@
+﻿@using Bloghost.Logic.Components
+@model Bloghost.UI.Web.Models.ViewPostListModel
+
+@{
+    ViewBag.Title = @Model.Blog.Title + " | Posts";
+
+    ViewBag.HomeClass = "";
+    ViewBag.BlogsClass = "class=parent active";
+    ViewBag.BestBlogsPreClass = "";
+    ViewBag.NewBlogsClass = "";
+    ViewBag.YFBlogsClass = "";
+    ViewBag.PostsClass = "active";
+    ViewBag.BestPostsClass = "";
+    ViewBag.Best24PostsClass = "";
+    ViewBag.NewClass = "";
+    ViewBag.YFPostsClass = "";
+    ViewBag.BloggersClass = "class=parent";
+    ViewBag.AllBloggersClass = "";
+    ViewBag.Top20BloggersClass = "";
+    ViewBag.NewBloggersClass = "";
+    ViewBag.YFBloggersClass = "";
+    ViewBag.FeedClass = "";
+}
+<div class="hero-unit">
+    <div class="container">
+        <h2>@Model.Blog.Title</h2>
+        <h3><i class="icon-pencil"></i>&nbsp;&nbsp;@Model.Blog.User.Name</h3>
+    </div>
+</div>
+
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid sidebar-right">
+        <div class="span9 blog-summary primary-column">
+
+            @for (int i = 0; i < 10 && i < Model.Posts.Count; i++)
+            {
+                {
+                    var post = Model.Posts[i];
+                <article class="entry-post">
+                    <header class="entry-header">
+                        <h3 class="entry-title"><a href="/blogs/@Model.Blog.AccessName/@post.AccessName">@post.Title</a></h3>
+                        <div class="byline">
+                            <i class="icon-time"></i>
+                            <abbr class="published" title="Monday, December 27, 2013,  8:21 PM">@post.DateCreate.ToLongDateString()</abbr>
+                            &nbsp;&nbsp; <a href="#view-comments"><i class="icon-comments-alt"></i>&nbsp;&nbsp;@post.Comments.Count comments</a>
+                        </div>
+                        <div class="entry-meta">
+                            <i class="icon-tag"></i>&nbsp;
+                                @foreach (var tagModel in post.Tags)
+                                {
+                                    <a href="#">@tagModel&nbsp;</a>
+                                }
+                        </div>
+                    </header>
+
+                    <div class="entry-content">
+                        <div>
+                            @(new HtmlString(ServiceFactory.GetPostService().GetPreviewPost(ServiceFactory.GetPostService().GetById(Guid.Parse(post.Id)))))
+                        </div>
+                        <p class="more right">
+                            <a class="btn btn-primary" href="/blogs/@Model.Blog.AccessName/@post.AccessName">Read More &rarr;</a>
+                    </div>
+
+                    <footer class="entry-footer">
+                        <span class="blog date">
+                            <span class="month">@post.DateCreate.DayOfWeek.ToString().Substring(0, 3)</span>
+                            <span class="day">@post.DateCreate.Day</span>
+                            <span class="year">@post.DateCreate.Year</span>
+                        </span>
+                    </footer>
+                </article>
+                }
+            }
+
+            <div class="pagination pagination-right no-margin pagination-mini">
+                <ul>
+                    <li class="disabled"><a href="#">Prev</a></li>
+                    <li class="action"><a href="#">1</a></li>
+                    <li class="disabled"><a href="#">Next</a></li>
+                </ul>
+            </div>
+        </div>
+        @Html.Partial("_PostListSideBar")
+    </div>
+</div>

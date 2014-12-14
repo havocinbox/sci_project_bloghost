@@ -1,0 +1,38 @@
+﻿@using Bloghost.UI.Web.Authentication
+@model Bloghost.UI.Web.Models.ViewPostListModel
+<section class="span3 sidebar secondary-column" id="secondary-nav">
+    @if (Authentication.IsAuthentication && Authentication.CurrentUser.Id.Equals(Guid.Parse(Model.Blog.User.Id)))
+    {
+        <aside class="widget clearfix">
+            <h5 class="short_headline"><span>Actions</span></h5>
+            <ul class="navigation">
+                <li><a href="/blogs/@Model.Blog.AccessName?action=create">Create new post</a></li>
+            </ul>
+        </aside>
+    }
+    <aside class="widget clearfix">
+        <h5 class="short_headline"><span>blog</span></h5>
+        <p>
+            <h6>@Model.Blog.Title</h6>
+            <a href="/blogs/@Model.Blog.AccessName?action=show_description">
+                <img class="aligncenter" src="@Url.Content("~/Images/" + Model.Blog.PathToAvatar)" alt="" /></a>
+        <p>
+            @Model.Blog.Description
+        </p>
+        <p class="right"><a href="/blogs/@Model.Blog.AccessName?action=show_description" class="btn btn-small btn-very-subtle">Learn More &rarr;</a></p>
+    </aside>
+
+    <aside class="widget clearfix">
+        <h5 class="short_headline"><span>Author</span></h5>
+        <p>
+            <h6>@Model.Blog.User.Name</h6>
+            <a href="/users/@Model.Blog.User.AccessName">
+                <img src="@Url.Content("~/Images/" + Model.Blog.User.PathToAvatar)" alt="" />
+            </a>
+        </p>
+        <ul class="navigation">
+            <li><a href="/users/@Model.Blog.User.AccessName">View profile</a></li>
+            <li><a href="#">Other blogs</a></li>
+        </ul>
+    </aside>
+</section>

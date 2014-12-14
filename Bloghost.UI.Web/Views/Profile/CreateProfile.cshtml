@@ -1,0 +1,85 @@
+﻿@model Bloghost.UI.Web.Models.RegisterUserModel
+@using Bloghost.UI.Web.Infrastructure
+
+@{
+    ViewBag.Title = "Register";
+    ViewBag.Register = "class=active";
+}
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid">
+        <div class="register-box clearfix">
+            <h2 class="short_headline"><span>Join Us</span></h2>
+            @if (ViewBag.HasError != null && ViewBag.HasError)
+            {
+                <div class="alert alert-error">
+                    <button data-dismiss="alert" class="close" type="button">×</button>
+                    <strong>Error!</strong> @ViewBag.ErrorMessage
+                </div>
+            }
+            <span class="help-inline">@Html.ValidationMessage("All")</span>
+            @using (Html.BeginForm("CreateProfile", "Profile", FormMethod.Post, new { @class = "form-horizontal", id = "registration-form-extended", @enctype = "multipart/form-data" }))
+            {
+                <fieldset>
+                    <div class="control-group">
+                        <label for="Name" class="required control-label">Name <span class="required">*</span></label>
+                        <div class="controls">
+                            @Html.TextBox("Name", Model.Name, new { id = "Name", @class = "span12" })
+                            <span class="help-inline">@Html.ValidationMessageFor(m => m.Name)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label required">Select Your Birthday</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.DateOfBirthMonth, VariablesFactory.MonthSelectListItems, new { @class = "span3 required" })
+                            @Html.DropDownListFor(m => m.DateOfBirthDay, VariablesFactory.DaySelectListItems, new { @class = "span3 required" })
+                            @Html.DropDownListFor(m => m.DateOfBirthYear, VariablesFactory.YearSelectListItems, new { @class = "span3 required" })
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Upload Your Avatar</label>
+                        <div class="controls">
+                            <span class="btn btn-primary fileinput-button"><span><i class="icon-plus icon-white"></i>Select photo...</span>
+                                <input type="file" id="File" name="File" />
+                            </span>@*<span class="info">(125 x 125 px 24 bit png)</span>*@
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label required" for="AboutUser">About your </label>
+                        <div class="controls">
+                            @Html.TextAreaFor(m => m.AboutUser, new { @class = "span3 required", style = "width:580px;" })
+                            <span class="help-inline">@Html.ValidationMessageFor(m => m.AboutUser)</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="control-group">
+                        <label for="Email" class="required control-label">Email <span class="required">*</span></label>
+                        <div class="controls">
+                            @Html.TextBox("Email", Model.Email, new { id = "Email", @class = "span12" })
+                            <span class="help-inline">@Html.ValidationMessageFor(m => m.Email)</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="Password" class="required control-label">Password <span class="required">*</span></label>
+                        <div class="controls">
+                            @Html.Password("Password", Model.Password, new { id = "Password", @class = "span12" })
+                            <span class="help-inline">@Html.ValidationMessage("Password")</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="ChangePassword" class="required control-label">Password Again <span class="required">*</span></label>
+                        <div class="controls">
+                            @Html.Password("ChangePassword", Model.ChangePassword, new { id = "ChangePassword", @class = "span12" })
+                            <span class="help-inline">@Html.ValidationMessage("ChangePassword")</span>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input class="btn btn-primary btn-large" type="submit" name="register" value="Register" />
+                    </div>
+                </fieldset>
+            }
+
+            <p>Already have an account? @Html.ActionLink("Login.", "Login", "Home")</p>
+        </div>
+    </div>
+</div>

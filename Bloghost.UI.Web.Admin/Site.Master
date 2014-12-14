@@ -1,0 +1,147 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Bloghost.UI.Web.Admin.SiteMaster" %>
+
+<%@ Import Namespace="Bloghost.UI.Web.Admin" %>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> | Admin</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/bootstrap" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+
+    <style>
+        canvas {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server">
+        <script src="/Scripts/bootstrap.min.js"></script>
+        <script src="/Scripts/jquery-ui-1.10.2.custom.min.js"></script>
+        <script src="/Scripts/Chart.js"></script>
+        <script src="/Scripts/theme.js"></script>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <header class="navbar navbar-inverse" role="banner">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="/Images/logo.png">
+                </a>
+            </div>
+            <ul class="nav navbar-nav pull-right hidden-xs">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                        <i class="icon-user"></i>&nbsp;&nbsp;
+                        <asp:Label runat="server" ID="CurrentUserName"></asp:Label>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><asp:HyperLink runat="server" ID="MyProfileHeadLink">My profile</asp:HyperLink></li>
+                        <li><asp:HyperLink runat="server" ID="SettingLink">Setting</asp:HyperLink></li>
+                        <li class="divider"></li>
+                        <li><a href="http://localhost:2317/blogs">Back to site</a></li>
+                    </ul>
+                </li>
+                <li class="settings hidden-xs hidden-sm">
+                    <asp:LinkButton runat="server" ID="LogoutLink" OnClick="Logout">
+                        <i class="icon-off"></i>
+                    </asp:LinkButton>
+                </li>
+            </ul>
+        </header>
+
+        <div id="sidebar-nav">
+            <ul id="dashboard-menu">
+                <li
+                    <%if (MenuNavigation.IsActiveMenuItem("statictics"))
+                          Response.Write("class=\"active\""); 
+                      %>>
+                    <div class="pointer">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
+                    <asp:HyperLink runat="server" NavigateUrl="Pages/Statistics.aspx">
+                        <i class="icon-signal"></i>
+                        <span>Statistics</span>
+                    </asp:HyperLink>
+                </li>
+                <li
+                    <%if (MenuNavigation.IsActiveMenuItem("users"))
+                          Response.Write("class=\"active\""); 
+                      %>>
+                    <a class="dropdown-toggle" href="#">
+                        <i class="icon-group"></i>
+                        <span>Users</span>
+                        <i class="icon-chevron-down"></i>
+                    </a>
+                    <ul class="submenu
+                        <%if (MenuNavigation.IsActiveMenuItem("users"))
+                              Response.Write(" active"); 
+                        %>">
+                        <li>
+                            <asp:HyperLink ID="UserListMenuItem" runat="server" NavigateUrl="/Pages/Users/UserList.aspx">User list</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="NewUserMenuItem" runat="server" NavigateUrl="/Pages/Users/NewUser.aspx">New user form</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="UserProfileMenuItem" runat="server" NavigateUrl="/Pages/Users/UserProfile.aspx">User profile</asp:HyperLink></li>
+                    </ul>
+                </li>
+                <li
+                    <%if (MenuNavigation.IsActiveMenuItem("myprofile"))
+                          Response.Write("class=\"active\""); 
+                      %>>
+                    <asp:HyperLink ID="MyProfileLink" runat="server" NavigateUrl="http://localhost:2317/blogs">
+                        <i class="icon-cog"></i>
+                        <span>My profile</span>
+                    </asp:HyperLink>
+                </li>
+                <li
+                    <%if (MenuNavigation.IsActiveMenuItem("extras"))
+                          Response.Write("class=\"active\""); 
+                      %>>
+                    <a class="dropdown-toggle" href="#">
+                        <i class="icon-share-alt"></i>
+                        <span>Extras</span>
+                        <i class="icon-chevron-down"></i>
+                    </a>
+                    <ul class="submenu
+                        <%if (MenuNavigation.IsActiveMenuItem("extras"))
+                          Response.Write(" active"); 
+                        %>
+                        ">
+                        <li>
+                            <asp:HyperLink ID="BackToSiteLink" runat="server" NavigateUrl="http://localhost:2317/blogs">Back to site</asp:HyperLink>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@model Bloghost.UI.Web.Models.ViewBlogListModel
+
+@{
+    ViewBag.Title = "Show all blogs";
+    ViewBag.BlogsClass = "class=parent active";
+}
+
+@Scripts.Render("~/Scripts/isotope_custom.min.js")
+
+<div class="hero-unit">
+    <div class="container">
+        <h2>Blogs</h2>
+        <h3></h3>
+    </div>
+</div>
+
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid">
+      @*<div class="mobile-filter-trigger">Filter <i class="icon-plus"></i></div>
+
+        <div class="filter-box clearfix">
+            <ul class='sort'>
+                <li><a class="active" href="#" data-filter="*">All</a></li>
+                <li><a href="#" data-filter=".letter-press">Best</a></li>
+                <li><a href="#" data-filter=".identity">Most reading</a></li>
+                <li><a href="#" data-filter=".motion">New</a></li>
+                <li><a href="#" data-filter=".featured">Featured</a></li>
+            </ul>
+        </div>*@
+
+        <ul class="gallery four_col clearfix">
+            @foreach (var blogDesc in Model.BlogList)
+            {
+                <li class="letter-press featured"><a class="hover" href="/blogs/@blogDesc.AccessName">
+                    <img src="@Url.Content("~/Images/" + blogDesc.PathToAvatar)" alt="" /><span class="plus"></span></a>
+                    <div class="entry-summary">
+                        <h4><a href="/blogs/@blogDesc.AccessName">@blogDesc.Title</a></h4>
+                        <p>
+                            @blogDesc.Description.Substring(0, blogDesc.Description.Length > 290 ? 290:blogDesc.Description.Length)
+                            @if (blogDesc.Description.Length > 290)
+                            {
+                                <span>...</span>
+                            }
+                        </p>
+                        <div class="categories"></div>
+                        <span class="credit"><a href="/users/@blogDesc.User.AccessName">@blogDesc.User.Name</a></span>
+                    </div>
+                </li>
+            }
+        </ul>
+@*        <div class="pagination pagination-centered no-margin pagination-footer pagination-mini">
+            <ul>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li class="active"><span>3</span></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </div>*@
+    </div>
+</div>

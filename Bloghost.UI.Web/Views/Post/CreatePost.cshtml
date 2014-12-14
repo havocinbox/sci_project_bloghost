@@ -1,0 +1,228 @@
+﻿@using Bloghost.UI.Web.Authentication
+@model Bloghost.UI.Web.Models.EditPostModel
+
+@{
+    ViewBag.Title = "Create new post";
+}
+
+@*@Styles.Render("~/Content/editor/css")*@
+@Scripts.Render("~/Content/editor/js")
+
+<div class="hero-unit">
+    <div class="container">
+        <h2>Create new post</h2>
+        <h3></h3>
+    </div>
+</div>
+
+@if (ViewBag.HasError != null && ViewBag.HasError)
+{
+    <div class="alert alert-error" id="Error">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Error!</strong> <span id="ErrorMessage">@ViewBag.ErrorMessage</span>
+    </div>
+}
+
+<div class="alert alert-error" id="JError" style="display: none;">
+    <button data-dismiss="alert" class="close" type="button">×</button>
+    <strong>Error!</strong> <span id="JErrorMessage">@ViewBag.ErrorMessage</span>
+</div>
+
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid sidebar-right">
+        <div class="span9 blog-summary primary-column">
+            @Html.ValidationMessage("All")
+
+            <input id="id" value="@Model.Id" type="hidden"/>
+            <input id="blogId" value="@Model.BlogId" type="hidden"/>
+
+            <div class="control-group">
+                <label class="required control-label">Blog </label>
+                <div class="controls">
+                    <span class="input-xlarge uneditable-input" style="width: 800px">
+                        @Bloghost.Logic.Components.ServiceFactory.GetBlogService().GetById(Guid.Parse(Model.BlogId)).Title
+                    </span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="required control-label">Author </label>
+                <div class="controls">
+                    <span class="input-xlarge uneditable-input" style="width: 800px">
+                        @Bloghost.UI.Web.Authentication.Authentication.CurrentUser.Name
+                    </span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="Title" class="control-label required">Title</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Title, new { id = "Title", @class = "span12", style = "width: 815   px;" })
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Tags" class="control-label required">Tags</label>
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Tags, new { id = "Tags", @class = "span12", style = "width: 815   px;" })
+                </div>
+            </div>
+
+            <div data-target="#editor" data-role="editor-toolbar" class="btn-toolbar">
+                @*                <div class="btn-group">
+                    <a title="" data-toggle="dropdown" class="btn dropdown-toggle" data-original-title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a style="font-family: 'Serif'" data-edit="fontName Serif">Serif</a></li>
+                        <li><a style="font-family: 'Sans'" data-edit="fontName Sans">Sans</a></li>
+                        <li><a style="font-family: 'Arial'" data-edit="fontName Arial">Arial</a></li>
+                        <li><a style="font-family: 'Arial Black'" data-edit="fontName Arial Black">Arial Black</a></li>
+                        <li><a style="font-family: 'Courier'" data-edit="fontName Courier">Courier</a></li>
+                        <li><a style="font-family: 'Courier New'" data-edit="fontName Courier New">Courier New</a></li>
+                        <li><a style="font-family: 'Comic Sans MS'" data-edit="fontName Comic Sans MS">Comic Sans MS</a></li>
+                        <li><a style="font-family: 'Helvetica'" data-edit="fontName Helvetica">Helvetica</a></li>
+                        <li><a style="font-family: 'Impact'" data-edit="fontName Impact">Impact</a></li>
+                        <li><a style="font-family: 'Lucida Grande'" data-edit="fontName Lucida Grande">Lucida Grande</a></li>
+                        <li><a style="font-family: 'Lucida Sans'" data-edit="fontName Lucida Sans">Lucida Sans</a></li>
+                        <li><a style="font-family: 'Tahoma'" data-edit="fontName Tahoma">Tahoma</a></li>
+                        <li><a style="font-family: 'Times'" data-edit="fontName Times">Times</a></li>
+                        <li><a style="font-family: 'Times New Roman'" data-edit="fontName Times New Roman">Times New Roman</a></li>
+                        <li><a style="font-family: 'Verdana'" data-edit="fontName Verdana">Verdana</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a title="" data-toggle="dropdown" class="btn dropdown-toggle" data-original-title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                        <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                        <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                    </ul>
+                </div>*@
+                <div class="btn-group">
+                    <a title="" data-edit="bold" class="btn" data-original-title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+                    <a title="" data-edit="italic" class="btn" data-original-title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+                    <a title="" data-edit="strikethrough" class="btn" data-original-title="Strikethrough"><i class="icon-strikethrough"></i></a>
+                    <a title="" data-edit="underline" class="btn" data-original-title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                </div>
+                <div class="btn-group">
+                    <a title="" data-edit="insertunorderedlist" class="btn" data-original-title="Bullet list"><i class="icon-list-ul"></i></a>
+                    <a title="" data-edit="insertorderedlist" class="btn" data-original-title="Number list"><i class="icon-list-ol"></i></a>
+                    <a title="" data-edit="outdent" class="btn" data-original-title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+                    <a title="" data-edit="indent" class="btn" data-original-title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+                </div>
+                <div class="btn-group">
+                    <a title="" data-edit="justifyleft" class="btn btn-info" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+                    <a title="" data-edit="justifycenter" class="btn" data-original-title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+                    <a title="" data-edit="justifyright" class="btn" data-original-title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+                    <a title="" data-edit="justifyfull" class="btn" data-original-title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+                </div>
+                <div class="btn-group">
+                    <a title="" data-toggle="dropdown" class="btn dropdown-toggle" data-original-title="Hyperlink"><i class="icon-link"></i></a>
+                    <div class="dropdown-menu input-append">
+                        <input type="text" data-edit="createLink" placeholder="URL" class="span2">
+                        <button type="button" class="btn">Add</button>
+                    </div>
+                    <a title="" data-edit="unlink" class="btn" data-original-title="Remove Hyperlink"><i class="icon-cut"></i></a>
+
+                </div>
+
+                <div class="btn-group">
+                    <a id="pictureBtn" title="" class="btn" data-original-title="Insert picture (or just drag &amp; drop)"><i class="icon-picture"></i></a>
+                    <input type="file" data-edit="insertImage" data-target="#pictureBtn" data-role="magic-overlay" style="opacity: 0; position: absolute; top: 0px; left: 0px; width: 39px; height: 30px;">
+                </div>
+                <div class="btn-group">
+                    <a title="" data-edit="undo" class="btn" data-original-title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+                    <a title="" data-edit="redo" class="btn" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+                </div>
+                <input type="text" x-webkit-speech="" id="voiceBtn" data-edit="inserttext" style="display: none;">
+            </div>
+            <div id="editor">Go ahead</div>
+            <div class="form-actions">
+                <input class="btn btn-primary btn-large" type="submit" id="createPostButton" value="Create" />
+            </div>
+        </div>
+
+        @{
+            var viewBlog = Bloghost.UI.Web.Mappers.EntityMapperFactory.GetViewBlogMapper().Map(Bloghost.Logic.Components.ServiceFactory.GetBlogService().GetById(Guid.Parse(Model.BlogId)));
+            
+            <section class="span3 sidebar secondary-column" id="secondary-nav">
+                <aside class="widget clearfix">
+                    <h5 class="short_headline"><span>Actions</span></h5>
+                    <ul class="navigation">
+                        <li><a href="/blogs/@viewBlog.AccessName?action=create">Create new post</a></li>
+                    </ul>
+                </aside>
+
+                <aside class="widget clearfix">
+                    <h5 class="short_headline"><span>blog</span></h5>
+                    <p>
+                        <h6>@viewBlog.Title</h6>
+                        <a href="/blogs/@viewBlog.AccessName?action=show_description">
+                            <img class="aligncenter" src="@Url.Content("~/Images/" + viewBlog.PathToAvatar)" alt="" /></a>
+                    <p>
+                        @viewBlog.Description
+                    </p>
+                    <p class="right"><a href="/blogs/@viewBlog.AccessName?action=show_description" class="btn btn-small btn-very-subtle">Learn More &rarr;</a></p>
+                </aside>
+
+                <aside class="widget clearfix">
+                    <h5 class="short_headline"><span>Author</span></h5>
+                    <p>
+                        <h6>@viewBlog.User.Name</h6>
+                        <a href="/users/@viewBlog.User.AccessName">
+                            <img src="@Url.Content("~/Images/" + viewBlog.User.PathToAvatar)" alt="" />
+                        </a>
+                    </p>
+                    <ul class="navigation">
+                        <li><a href="/users/@viewBlog.User.AccessName">View profile</a></li>
+                        <li><a href="#">Other blogs</a></li>
+                    </ul>
+                </aside>
+            </section>
+        }
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        function initToolbarBootstrapBindings() {
+            var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                  'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+                  'Times New Roman', 'Verdana'],
+                  fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+            $.each(fonts, function (idx, fontName) {
+                fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+            });
+            $('a[title]').tooltip({ container: 'body' });
+            $('.dropdown-menu input').click(function () { return false; })
+                .change(function () { $(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle'); })
+            .keydown('esc', function () { this.value = ''; $(this).change(); });
+
+            $('[data-role=magic-overlay]').each(function () {
+                var overlay = $(this), target = $(overlay.data('target'));
+                overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+            });
+            if ("onwebkitspeechchange" in document.createElement("input")) {
+                var editorOffset = $('#editor').offset();
+                $('#voiceBtn').css('position', 'absolute').offset({ top: editorOffset.top, left: editorOffset.left + $('#editor').innerWidth() - 35 });
+            } else {
+                $('#voiceBtn').hide();
+            }
+        };
+        function showErrorAlert(reason, detail) {
+            var msg = '';
+            if (reason === 'unsupported-file-type') { msg = "Unsupported format " + detail; }
+            else {
+                console.log("error uploading file", reason, detail);
+            }
+            $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+             '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+        };
+        initToolbarBootstrapBindings();
+        $('#editor').wysiwyg({ fileUploadError: showErrorAlert });
+        window.prettyPrint && prettyPrint();
+    });
+    
+    $(function () {
+        $("#editor").html(@Model.Content);
+    });
+</script>

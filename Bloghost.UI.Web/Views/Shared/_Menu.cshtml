@@ -1,0 +1,31 @@
+﻿@using Bloghost.UI.Web.Authentication
+<div class="container">
+    <nav id="main_menu">
+        <ul class="primary_menu">
+            <li @ViewBag.HomeClass>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="parent @ViewBag.BlogsClass"><a href="javascript:void(0)">Blogs<i></i></a>
+                <ul>
+                    <li @ViewBag.YFBlogsClass><a href="/blogs?active=show&filter=all">All blogs</a></li>
+                    <li @ViewBag.BestBlogsPreClass><a href="/blogs?active=show_blogs&filter=popular">Popular blogs</a></li>
+                    <li @ViewBag.NewBlogsClass><a href="/blogs?active=show_blogs&filter=new">New blogs</a></li>
+                </ul>
+            </li>
+            @if (Authentication.IsAuthentication)
+            {
+                <li @ViewBag.CreateBlog><a href="/blogs?action=create">Create blog</a></li>
+                <li @ViewBag.MyProfile><a href="/users/@Authentication.CurrentUser.AccessName">My profile</a></li>
+            }
+            else
+            {
+                <li @ViewBag.Login><a href="/login">Login</a></li>
+                <li @ViewBag.Register><a href="/register">Register</a></li>
+            }
+        </ul>
+    </nav>
+
+    <div id="logo">
+        <a href="@Url.Action("Index", "Home")">
+            <img alt="" src="@Url.Content("~/Content/themes/base/images/trans.gif")" />
+        </a>
+    </div>
+</div>

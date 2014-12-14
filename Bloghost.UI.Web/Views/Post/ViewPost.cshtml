@@ -1,0 +1,176 @@
+﻿@using Bloghost.UI.Web.Authentication
+@model Bloghost.UI.Web.Models.ViewPostModel
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.BlogsClass = "class=parent active";
+}
+
+<input type="hidden" value="@Model.Id" id="postId"/>
+<div class="container clearfix" id="main-content">
+    <div class="row-fluid sidebar-right">
+        <div class="span9 blog-detail primary-column">
+            <article class="entry-post">
+                <header class="entry-header">
+                    <h1>@Model.Title</h1>
+                    <div class="byline">
+                        <i class="icon-pencil"></i>
+                        @Model.Blog.User.Name &nbsp;&nbsp;
+                        <i class="icon-time"></i>
+                        <abbr class="published" title="Monday, December 27, 2013,  8:21 PM">@Model.DateCreate.ToLongDateString()</abbr>
+                        &nbsp;&nbsp; <a href="#view-comments"><i class="icon-comments-alt"></i>&nbsp;&nbsp;@Model.Comments.Count comments</a>
+                    </div>
+                    <div class="entry-meta">
+                        <i class="icon-tags"></i>&nbsp;
+                        @foreach (var tagModel in Model.Tags)
+                        {
+                            <a href="#">@tagModel&nbsp;</a>
+                        }
+                    </div>
+                </header>
+
+                <div class="entry-content">
+                    @(new HtmlString(Model.Content))
+                </div>
+
+                <div class="entry-tags">
+                    <div class="tag_line">
+                        Tags:<br class="clear" />
+                        @foreach (var tagModel in Model.Tags)
+                        {
+                            <a href="#">@tagModel&nbsp;</a>
+                        }
+                    </div>
+                </div>
+
+                <footer class="entry-footer">
+                    <span class="blog date">
+                        <span class="month">@Model.DateCreate.DayOfWeek.ToString().Substring(0, 3)</span>
+                        <span class="day">@Model.DateCreate.Day</span>
+                        <span class="year">@Model.DateCreate.Year</span>
+                    </span>
+                </footer>
+            </article>
+
+            <div class="entry-pagination">
+                <ul class="pager">
+                </ul>
+            </div>
+
+            <section id="view-comments" class="entry-comments clearfix">
+                <h3>@Model.Comments.Count Comments <a href="#comment-form" class="scrollto">| Make a comment</a></h3>
+                <ul id="commentList">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <li id="comment-1">
+                            <footer class="comment-meta">
+                                <a href="#" rel="external nofollow" title="@comment.User.Name">
+                                    <img alt="@comment.User.Name" src="@Url.Content("~/Images/" + @comment.User.PathToAvatar)" class="avatar" /></a>
+                                <div class="comment-meta">
+                                    <span class="comment-author vcard"><cite title="LinkURLofauthor"><a href="#" title="@comment.User.Name" class="url" rel="external nofollow">@comment.User.Name</a></cite></span>
+                                    <time class="published" datetime="2013-10-10T09:57:00Z">@comment.CreateDate.ToLongDateString()</time>
+                                    | <a class="permalink" href="#" title="Permalink to comment 1">Permalink</a> | <a class="comment-reply-link" href="#">Reply</a>
+                                </div>
+                            </footer>
+                            <div class="text">
+                                @(new HtmlString(@comment.Content))
+                            </div>
+
+                            @*<ul class="children">
+                                <li>
+                                    <footer class="comment-meta">
+                                        <a href="#" rel="external nofollow" title="Dave">
+                                            <img alt="Dave" src="@Url.Content("~/Content/themes/base/images/demo/dave.jpg")" class="avatar" /></a>
+                                        <div class="comment-meta">
+                                            <span class="comment-author vcard"><cite title="LinkURLofauthor"><a href="#" title="Dave" class="url" rel="external nofollow">Dave</a></cite></span>
+                                            <time class="published" datetime="2013-10-10T09:57:00Z">October 10, 2013</time>
+                                            | <a class="permalink" href="#" title="Permalink to comment 2">Permalink</a> | <a class="comment-reply-link" href="#">Reply</a>
+                                        </div>
+                                    </footer>
+                                    <div class="text">
+                                        <p>Donec sagittis lobortis libero vel semper. Nulla facilisi. Sed venenatis laoreet ligula, vulputate ornare magna posuere lobortis. Proin volutpat massa nec odio laoreet pharetra. Suspendisse quis dolor et nisl volutpat pretium. Mauris blandit metus sit amet risus aliquet et dapibus est vestibulum. Pellentesque dignissim condimentum porttitor. Vivamus est ipsum, ultrices ac ultrices sed, semper non nulla.</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <footer class="comment-meta">
+                                        <a href="#" rel="external nofollow" title="Nickie">
+                                            <img alt="Jake" src="@Url.Content("~/Content/themes/base/images/demo/nickie.jpg")" class="avatar" /></a>
+                                        <div class="comment-meta">
+                                            <span class="comment-author vcard"><cite title="LinkURLofauthor"><a href="#" title="Nickie" class="url" rel="external nofollow">Nickie</a></cite></span>
+                                            <time class="published" datetime="2013-10-10T09:57:00Z">October 10, 2013</time>
+                                            | <a class="permalink" href="#" title="Permalink to comment 3">Permalink</a> | <a class="comment-reply-link" href="#">Reply</a>
+                                        </div>
+                                    </footer>
+                                    <div class="text">
+                                        <p>Suspendisse a eleifend nisl. Sed elit leo, feugiat id vehicula nec, eleifend sed felis. Etiam gravida, nisi ac sagittis viverra, purus eros rhoncus odio, a dapibus felis turpis vel massa. Donec vestibulum luctus tortor ac tristique. Praesent vel est eu nisi vehicula commodo. </p>
+                                        <p>Phasellus eleifend, ligula ut ornare euismod, ipsum libero adipiscing nunc, in scelerisque ligula ligula eu massa. </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <footer class="comment-meta">
+                                        <a href="#" rel="external nofollow" title="Jake">
+                                            <img alt="Jake" src="@Url.Content("~/Content/themes/base/images/demo/jake.jpg")" class="avatar" /></a>
+                                        <div class="comment-meta">
+                                            <span class="comment-author vcard"><cite title="LinkURLofauthor"><a href="#" title="Jake" class="url" rel="external nofollow">Jake</a></cite></span>
+                                            <time class="published" datetime="2013-10-10T09:57:00Z">October 10, 2013</time>
+                                            | <a class="permalink" href="#" title="Permalink to comment 4">Permalink</a> | <a class="comment-reply-link" href="#">Reply</a>
+                                        </div>
+                                    </footer>
+                                    <div class="text">
+                                        <p>Mauris sodales imperdiet viverra. Fusce bibendum rhoncus nibh et porta. Vestibulum nec nibh tortor. Morbi viverra cursus lorem et dignissim. Maecenas rutrum adipiscing libero ut rhoncus. Cras commodo diam quis leo tristique a porta velit porta. Nunc non tellus et leo rutrum dapibus. </p>
+                                    </div>
+                                </li>
+
+                            </ul>*@
+                        </li>
+                    }
+                </ul>
+
+                @if (Authentication.IsAuthentication)
+                {
+                    <div id="comment-form">
+                        <h3>Leave a Comment</h3>
+                        <div class="comment_form">
+                            <span class="inputwrapper">
+                                <label for="message">Message:</label>
+                                <textarea name="message" id="commentMessage" rows="5" cols="30"></textarea>
+                            </span>
+                            <input type="submit" value="Add Comment" class="btn btn-primary" id="addNewComment" />
+                        </div>
+                    </div>
+                }
+
+            </section>
+        </div>
+
+        @Html.Partial("_PostSideBar")
+
+    </div>
+</div>
+
+<!-- Delete blog modal -->
+<input type="hidden" value="@Model.Id" id="blogId"/>
+<div class="modal fade" style="display: none;" id="deletePostModel" tabindex="-1" role="dialog" aria-labelledby="DeleteProfileModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Are you ABSOLUTELY sure?</h4>
+            </div>
+            <div class="modal-body">
+                <p>This action <b>CANNOT</b> be undone. This will delete <b>your post</b>, posts, and comments permanently.</p>
+                <p>Please type in the <b>BLOG LINK</b> to confirm.</p>
+                <div class="modal-form">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <h6 class="btn-delete">
+                    <button id="deletePostButton" type="button" class="btn btn-primary" style="width: 100%;">I understand the consequences, delete my post</button>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>

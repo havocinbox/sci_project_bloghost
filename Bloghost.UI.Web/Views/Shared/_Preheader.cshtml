@@ -1,0 +1,55 @@
+﻿@using Bloghost.Model
+@using Bloghost.UI.Web.Authentication
+@if (Authentication.IsAuthentication)
+{
+    <section class="container preheader">
+        <nav class="user clearfix">
+            <a href="/users/@Authentication.CurrentUser.AccessName"><i class="icon-user"></i> @Authentication.CurrentUser.Name</a>
+            @{
+                switch (Authentication.CurrentUser.Role.Name)
+                {
+                    case Role.Names.READER:
+                        <a href="/blogs"><span class="label label-success">@Role.Names.READER</span></a>
+                        break;
+                    case Role.Names.BLOGGER:
+                        <a href="/blogs"><span class="label label-info">@Role.Names.BLOGGER</span></a>
+                        break;
+                    case Role.Names.MODERATOR:
+                        <a href="/blogs"><span class="label label-warning">@Role.Names.MODERATOR</span></a>
+                        break;
+                    case Role.Names.ADMINISTRATOR:
+                        <a href="http://localhost:35629/"><span class="label label-danger">@Role.Names.ADMINISTRATOR</span></a>
+                        break;
+                }
+            }
+            @if (Authentication.CurrentUser.Role.Name == Role.Names.ADMINISTRATOR)
+            {
+                <a href="http://localhost:35629/">Admin panel</a>
+            }
+            <a href="@Url.Action("Login", "Home")">My blogs</a>
+            <a href="@Url.Action("Logout", "Home")"><i class="icon-off"></i> Logout</a>
+        </nav>
+
+        <div class="search-wrapper">
+            <form class="search" method="GET" action="">
+                <div id="search-trigger">Search:</div>
+                <input id="search-box" type="text" placeholder="search + enter">
+            </form>
+        </div>
+    </section>
+}
+else
+{
+    <section class="container preheader">
+        <nav class="user clearfix">
+            <a href="@Url.Action("Login", "Home")"><i class="icon-user"></i> Login</a>
+            <a href="@Url.Action("CreateProfile", "Profile")"><i class="icon-user"></i> Register</a>
+        </nav>
+        <div class="search-wrapper">
+            <form class="search" method="post" action="">
+                <div id="search-trigger">Search:</div>
+                <input id="search-box" type="text" placeholder="search + enter">
+            </form>
+        </div>
+    </section>
+}
